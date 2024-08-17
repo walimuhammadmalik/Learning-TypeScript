@@ -48,13 +48,24 @@ const connection = new DataSource({
 
 // add a user
 app.post("/add", async function (req, res) {
-  const userRepo = connection.getRepository(User);
-  const user = new User();
-  user.name = req.body.name;
-  user.email = req.body.email;
-  user.password = req.body.password;
-  await userRepo.save(user);
-  res.json(user);
+  try {
+    const userRepo = connection.getRepository(User);
+    const user = new User();
+    if (!req.body.name || !req.body.email || !req.body.password) {
+      return res.status(400).send("Missing required fields");
+    }
+    if (await userRepo.findOne({ where: { email: req.body.email } })) {
+      return res.status(400).send("User already exists");
+    }
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    await userRepo.save(user);
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
 });
 
 connection

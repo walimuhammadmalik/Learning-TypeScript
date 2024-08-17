@@ -46,6 +46,11 @@ const connection = new DataSource({
   entities: ["src/entities/*{.ts,.js}"],
 });
 
+// add a user
+app.post("/add", async function (req, res) {
+  const userRepo = connection.getRepository(User);
+});
+
 connection
   .initialize()
   .then(() => {

@@ -49,6 +49,12 @@ const connection = new DataSource({
 // add a user
 app.post("/add", async function (req, res) {
   const userRepo = connection.getRepository(User);
+  const user = new User();
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.password = req.body.password;
+  await userRepo.save(user);
+  res.json(user);
 });
 
 connection

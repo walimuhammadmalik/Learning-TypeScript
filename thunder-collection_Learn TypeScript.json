@@ -1,0 +1,35 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Learn TypeScript",
+    "collectionId": "201e4bda-4942-4399-b5e4-912584b01097",
+    "dateExported": "2024-08-17T19:50:46.417Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "4ff8d3a3-9adc-4787-a0b8-b3064b7eb907",
+            "colId": "201e4bda-4942-4399-b5e4-912584b01097",
+            "containerId": "",
+            "name": "get all users",
+            "url": "http://localhost:3000/users",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-08-17T19:50:06.865Z",
+            "modified": "2024-08-17T19:50:06.865Z",
+            "headers": []
+        },
+        {
+            "_id": "c9e20848-59f0-4bec-bb4d-86a74cc960cb",
+            "colId": "201e4bda-4942-4399-b5e4-912584b01097",
+            "containerId": "",
+            "name": "get all users",
+            "url": "http://localhost:3000/users",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-08-17T19:50:12.290Z",
+            "modified": "2024-08-17T19:50:12.291Z",
+            "headers": []
+        }
+    ],
+    "ref": "csZr7qG4YWZBT9vnKDa9VEQHMLrBqL_OTvFQUiS4junMTNS_MT2yttBCf7H1SHrr5MC3cmSOdIQLBjsinNCULA"
+}

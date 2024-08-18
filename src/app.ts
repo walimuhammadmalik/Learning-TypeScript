@@ -68,6 +68,34 @@ app.post("/add", async function (req, res) {
   }
 });
 
+//get all users
+app.get("/users", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    const users = await userRepo.find();
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+// delete a user by using id
+app.post("/delete", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    const user = await userRepo.findOne(req.body.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    await userRepo.delete(user);
+    res.send("User deleted successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 connection
   .initialize()
   .then(() => {

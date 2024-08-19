@@ -115,6 +115,21 @@ app.post("/update", async function (req, res) {
   }
 });
 
+// get a user by using id
+app.get("/user/:id", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    const user = await userRepo.findOneBy({ id: parseInt(req.params.id) });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 connection
   .initialize()
   .then(() => {

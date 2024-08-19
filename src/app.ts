@@ -96,6 +96,25 @@ app.post("/delete", async function (req, res) {
   }
 });
 
+// update a user using id
+app.post("/update", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    const user = await userRepo.findOne(req.body.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    await userRepo.save(user);
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 connection
   .initialize()
   .then(() => {

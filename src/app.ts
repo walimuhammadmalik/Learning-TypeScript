@@ -130,6 +130,23 @@ app.get("/user/:id", async function (req, res) {
   }
 });
 
+// login a user
+app.post("/login", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    const user = await userRepo.findOne({
+      where: { email: req.body.email, password: req.body.password },
+    });
+    if (!user) {
+      return res.status(400).send("Invalid credentials");
+    }
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 connection
   .initialize()
   .then(() => {

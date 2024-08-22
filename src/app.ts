@@ -147,6 +147,7 @@ app.post("/login", async function (req, res) {
   }
 });
 
+// start the server after the database
 connection
   .initialize()
   .then(() => {

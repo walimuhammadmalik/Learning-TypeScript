@@ -147,6 +147,16 @@ app.post("/login", async function (req, res) {
   }
 });
 
+// logout a user
+app.post("/logout", async function (req, res) {
+  try {
+    res.send("User logged out successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 // start the server after the database
 connection
   .initialize()

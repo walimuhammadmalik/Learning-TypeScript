@@ -157,6 +157,30 @@ app.post("/logout", async function (req, res) {
   }
 });
 
+//create a new user or edit an existing user
+app.post("/save", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    let user = new User();
+    if (req.body.id) {
+      user = await userRepo.findOne(req.body.id) as User;
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+    }
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    await userRepo.save(user);
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+
+
 // start the server after the database
 connection
   .initialize()

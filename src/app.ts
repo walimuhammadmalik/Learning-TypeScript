@@ -2,6 +2,8 @@ import express from "express";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "./entities/user";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -34,12 +36,12 @@ app.get("/", async function (req, res) {
 });
 
 const connection = new DataSource({
-  type: "postgres",
-  host: "richtodo-richtodo.k.aivencloud.com",
-  port: 28102,
-  username: "avnadmin",
-  password: "AVNS_wHzComkLV1iLuCgWJ_k",
-  database: "defaultdb",
+  type: process.env.DB_TYPE as 'postgres',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 28102,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
   synchronize: true,
   ssl: { rejectUnauthorized: false },
   // logging: true,

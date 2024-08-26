@@ -10,8 +10,8 @@ app.use(express.json());
 
 const port = 3000;
 
-app.get("/", async function (req, res) {
-  const userRepo = connection.getRepository(User);
+// app.get("/", async function (req, res) {
+  // const userRepo = connection.getRepository(User);
 
   // create a new user
   // let user = new User();
@@ -25,15 +25,15 @@ app.get("/", async function (req, res) {
   // const user = await userRepo.find();
 
   // delete a record
-  const user = await userRepo.delete({ id: 1 });
+  // const user = await userRepo.delete({ id: 1 });
 
   //update a record
   // const user = await userRepo.update({ id: 1 }, { name: "John Doe" });
 
   // console.log(users);
-  res.json(user);
+  // res.json(user);
   // res.send("hello world");
-});
+// });
 
 const connection = new DataSource({
   type: process.env.DB_TYPE as 'postgres',

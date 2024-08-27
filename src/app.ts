@@ -93,7 +93,7 @@ app.post("/delete", async function (req, res) {
     await userRepo.delete(user);
     res.send("User deleted successfully");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).send("Internal server error");
   }
 });

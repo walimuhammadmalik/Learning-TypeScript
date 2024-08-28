@@ -1,4 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { BeforeInsert } from "typeorm";
+import * as bcrypt from "bcryptjs";
+
+// save password in encrypted form in database
 
 @Entity()
 export class User {
@@ -13,4 +17,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
 }

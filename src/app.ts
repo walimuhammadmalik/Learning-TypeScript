@@ -2,7 +2,7 @@ import express from "express";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "./entities/user";
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
@@ -11,32 +11,32 @@ app.use(express.json());
 const port = 3000;
 
 // app.get("/", async function (req, res) {
-  // const userRepo = connection.getRepository(User);
+// const userRepo = connection.getRepository(User);
 
-  // create a new user
-  // let user = new User();
-  // user.name = "John";
-  // user.email = "wa@gmail.com";
-  // user.password = "123456";
-  // user = await userRepo.save(user);
-  // console.log("User has been saved", user);
+// create a new user
+// let user = new User();
+// user.name = "John";
+// user.email = "wa@gmail.com";
+// user.password = "123456";
+// user = await userRepo.save(user);
+// console.log("User has been saved", user);
 
-  // find all records
-  // const user = await userRepo.find();
+// find all records
+// const user = await userRepo.find();
 
-  // delete a record
-  // const user = await userRepo.delete({ id: 1 });
+// delete a record
+// const user = await userRepo.delete({ id: 1 });
 
-  //update a record
-  // const user = await userRepo.update({ id: 1 }, { name: "John Doe" });
+//update a record
+// const user = await userRepo.update({ id: 1 }, { name: "John Doe" });
 
-  // console.log(users);
-  // res.json(user);
-  // res.send("hello world");
+// console.log(users);
+// res.json(user);
+// res.send("hello world");
 // });
 
 const connection = new DataSource({
-  type: process.env.DB_TYPE as 'postgres',
+  type: process.env.DB_TYPE as "postgres",
   host: process.env.DB_HOST,
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 28102,
   username: process.env.DB_USERNAME,
@@ -90,7 +90,7 @@ app.post("/delete", async function (req, res) {
     if (!user) {
       return res.status(404).send("User not found");
     }
-    await userRepo.delete(user);
+    await userRepo.remove(user);
     res.send("User deleted successfully");
   } catch (error) {
     // console.log(error);
@@ -165,7 +165,7 @@ app.post("/save", async function (req, res) {
     const userRepo = connection.getRepository(User);
     let user = new User();
     if (req.body.id) {
-      user = await userRepo.findOne(req.body.id) as User;
+      user = (await userRepo.findOne(req.body.id)) as User;
       if (!user) {
         return res.status(404).send("User not found");
       }
@@ -180,8 +180,6 @@ app.post("/save", async function (req, res) {
     res.status(500).send("Internal server error");
   }
 });
-
-
 
 // start the server after the database
 connection

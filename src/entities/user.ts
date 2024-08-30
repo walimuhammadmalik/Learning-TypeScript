@@ -2,7 +2,6 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { BeforeInsert } from "typeorm";
 import * as bcrypt from "bcryptjs";
 
-// save password in encrypted form in database
 
 @Entity()
 export class User {

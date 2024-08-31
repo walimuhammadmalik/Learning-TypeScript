@@ -181,6 +181,18 @@ app.post("/save", async function (req, res) {
   }
 });
 
+// get all users
+app.get("/users", async function (req, res) {
+  try {
+    const userRepo = connection.getRepository(User);
+    const users = await userRepo.find();
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 // start the server after the database
 connection
   .initialize()
